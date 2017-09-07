@@ -26,7 +26,20 @@ x = 3; y = 5; % integers
 
 N = 500; % define sequence length
 
+s=randi(4,1,500)
+d=''
+for ii=1:500
+    if s(ii)==1
+        d(ii)='A'
+    elseif s(ii)==2
+        d(ii)='T'
+    elseif s(ii)==3
+        d(ii)='G'
+    else d(ii)='C'
+    end
+end
 
+d
 
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
 % transcribed and translated. They start with a start codon (ATG) and end with a
