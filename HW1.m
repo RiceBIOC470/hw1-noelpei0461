@@ -45,6 +45,26 @@ d
 % transcribed and translated. They start with a start codon (ATG) and end with a
 % stop codon (TAA, TGA, or TAG). Write a piece of code that finds the longest ORF 
 % in your seqeunce rand_seq. Hint: see the function strfind.
+d
+k=strfind(d,'ATG')
+for i=k
+    for ii=i:498
+        if d(ii:ii+2)=='TAA'
+            disp(ii)
+            break;
+        elseif d(ii:ii+2)=='TAG'
+            disp(ii)
+            break;
+        elseif d(ii:ii+2)=='TGA'
+            disp(ii)
+            break;
+        end
+        m=ii
+        ii=ii+3;
+    end
+end
+dist=m-k(1) 
+    
 
 %part 3: copy your code in parts 1 and 2 but place it inside a loop that
 % runs 1000 times. Use this to determine the probability
