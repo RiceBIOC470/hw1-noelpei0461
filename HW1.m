@@ -105,6 +105,9 @@ for i=1:1000
             end
         end
         A=min(dist);
+        if isempty(A)
+            A=0
+        end
         dist2(i)=A;
     end
     distmax=max(dist2)
