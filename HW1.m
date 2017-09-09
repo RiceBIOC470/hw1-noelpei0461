@@ -115,18 +115,18 @@ for i=1:1000
         end
         A=min(dist);
         if isempty(A)
-            A=0
+            A=0;
         end
         dist2(i)=A;
     end
     distmax=max(dist2)
     if distmax>50
-        a=a+1
+        a=a+1;
     else
-        a=a
+        a=a;
     end
 end
-xx=a/1000
+xx=a/1000;
 disp(xx)
 %part 4: copy your code from part 3 but put it inside yet another loop,
 % this time over the sequence length N. Plot the probability of having an
