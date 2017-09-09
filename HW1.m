@@ -185,6 +185,10 @@ for N=3:1000
     Rxx(N)=xx;
 end
 Rxx
+xval=[1:998]
+yval=Rxx
+plot(xval,yval)
+
 %part 5: Make sure your results from part 4 are sensible. What features
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
