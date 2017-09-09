@@ -46,24 +46,33 @@ d
 % stop codon (TAA, TGA, or TAG). Write a piece of code that finds the longest ORF 
 % in your seqeunce rand_seq. Hint: see the function strfind.
 d
-k=strfind(d,'ATG')
-for i=k
-    for ii=i:498
+k=strfind(d,'ATG');
+len=length(k);
+dist=[];
+dist2=[];
+g=1;
+for i=1:len
+    for ii=k(i)+3:3:498
         if d(ii:ii+2)=='TAA'
-            disp(ii)
-            break;
+            m=ii;
+            dist(g)=m-k(i);
+            g=g+1;
         elseif d(ii:ii+2)=='TAG'
-            disp(ii)
-            break;
+            m=ii;
+            dist(g)=m-k(i);
+            g=g+1;
         elseif d(ii:ii+2)=='TGA'
-            disp(ii)
-            break;
+            m=ii;
+            dist(g)=m-k(i);
+            g=g+1;
         end
-        m=ii
-        ii=ii+3;
     end
+    A=min(dist);
+    if isempty(A)
+        A=0
+    end
+    dist2(i)=A;
 end
-dist=m-k(1) 
     
 
 %part 3: copy your code in parts 1 and 2 but place it inside a loop that
