@@ -185,7 +185,7 @@ for N=3:1000
     Rxx(N)=xx;
 end
 Rxx
-xval=[1:998]
+xval=[3:1000]
 yval=Rxx
 plot(xval,yval)
 
