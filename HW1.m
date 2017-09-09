@@ -131,7 +131,60 @@ disp(xx)
 %part 4: copy your code from part 3 but put it inside yet another loop,
 % this time over the sequence length N. Plot the probability of having an
 % ORF > 50 b.p. as a funciton of the sequence length. 
-
+Rxx=[]
+for N=3:1000
+    a=0;
+    for i=1:1000
+        s=randi(4,1,N);
+        d='';
+        for ii=1:N
+            if s(ii)==1
+                d(ii)='A';
+            elseif s(ii)==2
+                d(ii)='T';
+            elseif s(ii)==3
+                d(ii)='G';
+            else d(ii)='C';
+            end
+        end
+        k=strfind(d,'ATG');
+        len=length(k);
+        dist=[];
+        dist2=[];
+        g=1;
+        for i=1:len
+            for ii=k(i)+3:3:N-2
+                if d(ii:ii+2)=='TAA'
+                    m=ii;
+                    dist(g)=m-k(i);
+                    g=g+1;
+                elseif d(ii:ii+2)=='TAG'
+                    m=ii;
+                    dist(g)=m-k(i);
+                    g=g+1;
+                elseif d(ii:ii+2)=='TGA'
+                    m=ii;
+                    dist(g)=m-k(i);
+                    g=g+1;
+                end
+            end
+            A=min(dist);
+            if isempty(A)
+                A=0;
+            end
+            dist2(i)=A;
+        end
+        distmax=max(dist2);
+        if distmax>50
+            a=a+1;
+        else
+            a=a;
+        end
+    end
+    xx=a/1000;
+    Rxx(N)=xx;
+end
+Rxx
 %part 5: Make sure your results from part 4 are sensible. What features
 % must this curve have (hint: what should be the value when N is small or when
 % N is very large? how should the curve change in between?) Make sure your
