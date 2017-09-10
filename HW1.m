@@ -132,12 +132,12 @@ disp(xx)
 % this time over the sequence length N. Plot the probability of having an
 % ORF > 50 b.p. as a funciton of the sequence length. 
 Rxx=[]
-for N=3:1000
+for xxx=3:N
     a=0;
     for i=1:1000
-        s=randi(4,1,N);
+        s=randi(4,1,xxx);
         d='';
-        for ii=1:N
+        for ii=1:xxx
             if s(ii)==1
                 d(ii)='A';
             elseif s(ii)==2
@@ -153,7 +153,7 @@ for N=3:1000
         dist2=[];
         g=1;
         for i=1:len
-            for ii=k(i)+3:3:N-2
+            for ii=k(i)+3:3:xxx-2
                 if d(ii:ii+2)=='TAA'
                     m=ii;
                     dist(g)=m-k(i);
