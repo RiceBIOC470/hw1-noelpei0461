@@ -207,11 +207,18 @@ plot(xval,yval)
 
 % part1: write code to read the Cp data from this file into a vector. You can ignore the last two
 % rows with positions beginning with G and H as there were no samples here. 
-
+qPCRdata='qPCRdata.txt'
+fid = fopen(qPCRdata,'r');
+format='%*s%f%s%*s%*f%*s%*s%*s%[^\n]';
+data = textscan(fid,format,'Delimiter','\t','HeaderLines',2);
+Cp = cell2mat(data(1,1));
+data
+Cp
 % Part 2: transform this vector into an array representing the layout of
 % the plate. e.g. a 6 row, 12 column array should that data(1,1) = Cp from
 % A1, data(1,2) = Cp from A2, data(2,1) = Cp from B1 etc. 
-
+Cpc=reshape(Cp,[12,8])
+Cpcc=Cpc'
 % Part 3. The 4th gene in columns 10 - 12 is known as a normalization gene.
 % That is, it's should not change between conditions and it is used to normalize 
 % the expression values for the others. For the other three
