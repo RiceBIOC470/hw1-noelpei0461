@@ -209,9 +209,9 @@ plot(xval,yval)
 % rows with positions beginning with G and H as there were no samples here. 
 qPCRdata='qPCRdata.txt'
 fid = fopen(qPCRdata,'r');
-format='%*s%f%s%*s%*f%*s%*s%*s%[^\n]';
+format='%*s%*f%s%*s%f%*s%*s%*s%[^\n]';
 data = textscan(fid,format,'Delimiter','\t','HeaderLines',2);
-Cp = cell2mat(data(1,1));
+Cp = cell2mat(data(1,2));
 data
 Cp
 % Part 2: transform this vector into an array representing the layout of
