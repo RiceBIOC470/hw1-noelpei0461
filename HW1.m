@@ -228,7 +228,12 @@ Cpcc=Cpc'
 % the gene in the 1st condition, CpX is the value of Cp in condition X and
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
-
+for i=1:3
+    for ii=1:12
+       Cpccx(i,ii)=Cpcc(i,ii)*(2^(Cpcc(i,10)-Cpcc(i,ii)-(Cpcc(4,10)-Cpcc(4,ii))));
+    end
+end
+Cpccx
 
 %% Challenge problems that extend the above (optional)
 
