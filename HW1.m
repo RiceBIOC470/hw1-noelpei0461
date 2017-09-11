@@ -230,7 +230,7 @@ Cpcc=Cpc'
 % Plot this data in an appropriate way. 
 for i=1:3
     for ii=1:12
-       Cpccx(i,ii)=Cpcc(i,ii)*(2^(Cpcc(i,10)-Cpcc(i,ii)-(Cpcc(4,10)-Cpcc(4,ii))));
+       Cpccx(i,ii)=2^(Cpcc(i,10)-Cpcc(i,ii)-(Cpcc(4,10)-Cpcc(4,ii)));
     end
 end
 Cpccx
