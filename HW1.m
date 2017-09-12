@@ -269,13 +269,13 @@ Bgene=Cpcc(1:6,4:6);
 Cgene=Cpcc(1:6,7:9);
 Dgene=Cpcc(1:6,10:12);
 
-AverageA=mean(Agene)
-AverageB=mean(Bgene)
-AverageC=mean(Cgene)
-AverageD=mean(Dgene)
+AverageA=mean(Agene);
+AverageB=mean(Bgene);
+AverageC=mean(Cgene);
+AverageD=mean(Dgene);
 %get average value for each gene in each condition
 
-all=[AverageA;AverageB;AverageC;AverageD]
+all=[AverageA;AverageB;AverageC;AverageD];
 
 Norm=[];
 
