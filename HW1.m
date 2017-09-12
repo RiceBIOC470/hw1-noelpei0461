@@ -222,6 +222,12 @@ Possibility(N)
 % N is very large? how should the curve change in between?) Make sure your
 % plot looks like this. 
 
+%Answer:
+%When N<50, which means the sequence length is less than 50 bps, the y value is 0, because find an ORF whose length is greater than 50 bps in a sequence less than 50bps is impossible.
+%Then the y value increases dramatically, meaning ORFs length greater than 50bps start showing up. Then, when N is very large, it will reach its limit at around 0.5, meaning although the sequence length is enough for ORFs longer than 50 bps to be find, the actual possiblity may be restrict by other factors as well.
+
+
+
 %% problem 3 data input/output and simple analysis
 
 %The file qPCRdata.txt is an actual file that comes from a Roche
