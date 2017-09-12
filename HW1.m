@@ -12,9 +12,17 @@ x = 3; y = 5; % integers
 % x = 3; y = '5'; %mixed
 
 %your code goes here
+if isnumeric(x)==0
+    x=str2num(x);
+end
+if isnumeric(y)==0
+    y=str2num(y)
+end
 
+z=x+y;
+disp(z)
 %output your answer
-
+8
 %% Problem 2 - our first real biology problem. Open reading frames and nested loops.
 
 %part 1: write a piece of code that creates a random DNA sequence of length
@@ -27,6 +35,7 @@ x = 3; y = 5; % integers
 N = 500; % define sequence length
 
 s=randi(4,1,500)
+% set up an array with 500 random numbers, range 1 to 4 in it.
 d=''
 for ii=1:500
     if s(ii)==1
@@ -37,19 +46,24 @@ for ii=1:500
         d(ii)='G'
     else d(ii)='C'
     end
+%For every 1 in s, input A in d; and substitue rest values as well.
 end
 
 d
-
+% d is the string with 500 random ATGC in it.
 %part 2: open reading frames (ORFs) are pieces of DNA that can be
 % transcribed and translated. They start with a start codon (ATG) and end with a
 % stop codon (TAA, TGA, or TAG). Write a piece of code that finds the longest ORF 
 % in your seqeunce rand_seq. Hint: see the function strfind.
 d
 k=strfind(d,'ATG');
+% find the location of all start condons 
 len=length(k);
+% find how many start condons are in it.
 dist=[];
+% dist is used to store every possible combination of a start codon to stop condons.
 dist2=[];
+% dist2 is used to store all the ORF length.
 g=1;
 for i=1:len
     for ii=k(i)+3:3:498
@@ -65,21 +79,28 @@ for i=1:len
             m=ii;
             dist(g)=m-k(i);
             g=g+1;
+        %find all stop codons after the start codon.
         end
     end
     A=min(dist);
+    % the smallest start/stop codon combination is the real ORF we are looking for.
     if isempty(A)
         A=0
     end
+    % for the sequence that does not have any stop codon after their start codons, set the value of the length of ORF as 0. 
     dist2(i)=A;
-end
     
+end
+distmax=max(dist2)
+%show the longest ORF in dist2.
 
 %part 3: copy your code in parts 1 and 2 but place it inside a loop that
 % runs 1000 times. Use this to determine the probability
 % that an sequence of length 500 has an ORF of greater than 50 b.p.
 a=0
+% a is the parameter used to express how many ORFs satisfied the requirement. 
 for i=1:1000
+% run 1000 times.
     s=randi(4,1,500);
     d='';
     for ii=1:500
@@ -120,6 +141,7 @@ for i=1:1000
         dist2(i)=A;
     end
     distmax=max(dist2)
+    % Judge for each time when we found an ORF, if that is greater than 50, then a=a+a
     if distmax>50
         a=a+1;
     else
@@ -128,66 +150,72 @@ for i=1:1000
 end
 xx=a/1000;
 disp(xx)
+% possibility
 %part 4: copy your code from part 3 but put it inside yet another loop,
 % this time over the sequence length N. Plot the probability of having an
 % ORF > 50 b.p. as a funciton of the sequence length. 
-Rxx=[]
-for xxx=3:N
-    a=0;
-    for i=1:1000
-        s=randi(4,1,xxx);
-        d='';
-        for ii=1:xxx
-            if s(ii)==1
-                d(ii)='A';
-            elseif s(ii)==2
-                d(ii)='T';
-            elseif s(ii)==3
-                d(ii)='G';
-            else d(ii)='C';
-            end
-        end
-        k=strfind(d,'ATG');
-        len=length(k);
-        dist=[];
-        dist2=[];
-        g=1;
-        for i=1:len
-            for ii=k(i)+3:3:xxx-2
-                if d(ii:ii+2)=='TAA'
-                    m=ii;
-                    dist(g)=m-k(i);
-                    g=g+1;
-                elseif d(ii:ii+2)=='TAG'
-                    m=ii;
-                    dist(g)=m-k(i);
-                    g=g+1;
-                elseif d(ii:ii+2)=='TGA'
-                    m=ii;
-                    dist(g)=m-k(i);
-                    g=g+1;
+function Css=Possibility(N)
+    Rxx=[];
+    %Rxx is an array that will be used to store the possibility values
+    for xxx=3:N
+        a=0;
+        for i=1:1000
+            s=randi(4,1,xxx);
+            d='';
+            for ii=1:xxx
+                if s(ii)==1
+                    d(ii)='A';
+                elseif s(ii)==2
+                    d(ii)='T';
+                elseif s(ii)==3
+                    d(ii)='G';
+                else d(ii)='C';
                 end
             end
-            A=min(dist);
-            if isempty(A)
-                A=0;
+            k=strfind(d,'ATG');
+            len=length(k);
+            dist=[];
+            dist2=[];
+            g=1;
+            for i=1:len
+                for ii=k(i)+3:3:xxx-2
+                    if d(ii:ii+2)=='TAA'
+                        m=ii;
+                        dist(g)=m-k(i);
+                        g=g+1;
+                    elseif d(ii:ii+2)=='TAG'
+                        m=ii;
+                        dist(g)=m-k(i);
+                        g=g+1;
+                    elseif d(ii:ii+2)=='TGA'
+                        m=ii;
+                        dist(g)=m-k(i);
+                        g=g+1;
+                    end
+                end
+                A=min(dist);
+                if isempty(A)
+                    A=0;
+                end
+                dist2(i)=A;
             end
-            dist2(i)=A;
+            distmax=max(dist2);
+            if distmax>50
+                a=a+1;
+            else
+                a=a;
+            end
         end
-        distmax=max(dist2);
-        if distmax>50
-            a=a+1;
-        else
-            a=a;
-        end
+        xx=a/1000;
+        Rxx(N)=xx;
     end
-    xx=a/1000;
-    Rxx(N)=xx;
+xval=[1:N]
+yval=Rxx(1:N)
+Css=plot(xval,yval)
 end
-Rxx
-xval=[3:N]
-yval=Rxx
-plot(xval,yval)
+
+Possibility(N)
+% this will give us the plot of the sequence that contains N bps.
 
 %part 5: Make sure your results from part 4 are sensible. What features
 % must this curve have (hint: what should be the value when N is small or when
