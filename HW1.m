@@ -212,13 +212,15 @@ fid = fopen(qPCRdata,'r');
 format='%*s%*f%s%*s%f%*s%*s%*s%[^\n]';
 data = textscan(fid,format,'Delimiter','\t','HeaderLines',2);
 Cp = cell2mat(data(1,2));
-data
+Cp=Cp';
 Cp
+%Cp is the vector that we are looking for
 % Part 2: transform this vector into an array representing the layout of
 % the plate. e.g. a 6 row, 12 column array should that data(1,1) = Cp from
 % A1, data(1,2) = Cp from A2, data(2,1) = Cp from B1 etc. 
 Cpc=reshape(Cp,[12,8])
-Cpcc=Cpc'
+data=Cpc'
+%directly assign them into a 12*8 matrix, then convert rows into columns.
 % Part 3. The 4th gene in columns 10 - 12 is known as a normalization gene.
 % That is, it's should not change between conditions and it is used to normalize 
 % the expression values for the others. For the other three
@@ -228,13 +230,39 @@ Cpcc=Cpc'
 % the gene in the 1st condition, CpX is the value of Cp in condition X and
 % CpN0 and CpNX are the same quantitites for the normalization gene.
 % Plot this data in an appropriate way. 
+Agene=Cpcc(1:6,1:3);
+Bgene=Cpcc(1:6,4:6);
+Cgene=Cpcc(1:6,7:9);
+Dgene=Cpcc(1:6,10:12);
+
+AverageA=mean(Agene)
+AverageB=mean(Bgene)
+AverageC=mean(Cgene)
+AverageD=mean(Dgene)
+%get average value for each gene in each condition
+
+all=[AverageA;AverageB;AverageC;AverageD]
+
+Norm=[];
+
 for i=1:3
-    for ii=1:12
-       Cpccx(i,ii)=2^(Cpcc(i,10)-Cpcc(i,ii)-(Cpcc(4,10)-Cpcc(4,ii)));
+    for ii=1:6
+       Norm(i,ii)=2^(all(i,1)-all(i,ii)-(all(4,1)-all(4,ii)));
+       %set condition 1 as the default for both gene. i row means the ith gene, ii means the condition, which is devided into 12 parts. 
     end
 end
-Cpccx
+Norm
+%Norm contains all normalized data of the three gene
+NormA=Norm(1,1:6);
+NormB=Norm(2,1:6);
+NormC=Norm(3,1:6);
 
+plot(NormA,'r--')
+hold on;
+plot(NormB,'b-')
+hold on;
+plot(NormC,'g-')
+%plot normalized A,B,C in a same graph
 %% Challenge problems that extend the above (optional)
 
 % 1. Write a solution to Problem 2 part 2 that doesn't use any loops at
