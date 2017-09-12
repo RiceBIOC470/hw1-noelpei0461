@@ -296,7 +296,20 @@ plot(NormC,'g-')
 % 1. Write a solution to Problem 2 part 2 that doesn't use any loops at
 % all. Hint: start by using the built in function bsxfun to make a matrix of all distances
 % between start and stop codons. 
+d
 
+s1=strfind(d,'ATG');
+t1=strfind(d,'TGA');
+t2=strfind(d,'TAA');
+t3=strfind(d,'TAG');
+c=[t1,t2,t3];
+n=sort(c);
+Min=bsxfun(@minus,n,s1(:));
+Minx=Min';
+Minx(rem(Minx,3)~=0|Minx<=0)=inf;
+ORFs=min(Minx);
+ORFf=ORFs(ORFs<Inf);
+disp(max(ORFf))
 % 2. Problem 2, part 4. Use Matlab to compute the exact solution to this
 % problem and compare your answer to what you got previously by testing
 % many sequences. Plot both on the same set of axes. Hint: to get started 
