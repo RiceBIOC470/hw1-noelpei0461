@@ -243,8 +243,7 @@ Possibility(N)
 % rows with positions beginning with G and H as there were no samples here. 
 qPCRdata='qPCRdata.txt'
 fid = fopen(qPCRdata,'r');
-format='%*s%*f%s%*s%f%*s%*s%*s%[^\n]';
-data = textscan(fid,format,'Delimiter','\t','HeaderLines',2);
+data = textscan(fid,'%*s%*f%s%*s%f%*s%*s%*s%[^\n]','Delimiter','\t','HeaderLines',2);
 Cp = cell2mat(data(1,2));
 Cp=Cp';
 Cp
