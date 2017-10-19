@@ -1,3 +1,20 @@
+GB comments:
+Prob1: 100%
+Prob2:
+P1:100
+P2: 100 
+P3:100
+P4: 50 Please, when defining your own function provide it as a separate file so I can call it. Your function does not work for me in this state but could it to work making its own file. No labels on the graph and its wrong. 
+P5:75 The probability is well over .5 
+Prob3
+P1: 100
+P2:100
+P3: 50 variable ‘Cpcc’ is not previously defined so the code doesn’t work at all. 
+Bonus:
+0; d is undefined. This solution should stand alone from the previous question. 
+Overall: 86
+
+
 % Homework 1. Due before class on 9/5/17
 
 %% Problem 1 - addition with strings
